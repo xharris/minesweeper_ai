@@ -11,13 +11,13 @@
    
 
 	<script>
+		var minesweeper;
 	$(function() {
 		var gameType = 'expert';
 		var zoom = '100';
 		var position = 'center';
 		var isNightMode = false;
 		var hashParts, i;
-		var minesweeper;
 
 		if (!!location.hash && location.hash.length > 1) {
 			hashParts = location.hash.substring(1).split('-');
@@ -416,16 +416,4 @@
 
 	</div></td></tr></tbody></table>
 
-
-
-<!--
-require_once        1540253148.6134 
-connect             1540253148.6146 
-getTopScores        1540253148.6151 
-mysqli_close        1540253148.6186 
-render_page         1540253148.6188 
-renderScoresPane_4x 1540253148.6199 
-resume_render_page  1540253148.6224 
-done                1540253148.6224 
--->
 <script src="ai.js"></script>

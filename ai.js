@@ -15,18 +15,21 @@ function getCell(x, y) {
     class_val = class_val.replace("blank","-");
     return {
         value: class_val,
-        element: cells[x+size[0]*y]
+        id: "#"+(x+1)+"_"+(y+1)
      };
 }
 
 function clickCell(x, y) {
-    console.log(getCell(x,y).element)
-    getCell(x,y).element.click();
+    console.log($(getCell(x,y).id))
+    $(getCell(x,y).id).click();
+    let el_position = $(getCell(x,y).id).position();
+    console.log(el_position.left, el_position.top)
+    $(document.elementFromPoint(el_position.left, el_position.top)).click();
 }
 
 function prepareAI() {
     size = [$("#game .bordertb").length/3, $("#game .borderlr").length/2];
-    cells = $("#game .square");
+    cells = $("#game .square"); 
     
     document.addEventListener("click",function(e){
         cells = $("#game .square"); 
@@ -36,7 +39,7 @@ function prepareAI() {
 }
 
 function runAI() {
-    clickCell(0,0);
+    clickCell(2,2);
 }
 
 prepareAI();

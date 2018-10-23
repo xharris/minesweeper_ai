@@ -15,15 +15,17 @@ function getCell(x, y) {
     class_val = class_val.replace("blank","-");
     return {
         value: class_val,
-        element: $("#"+(x+1)+"_"+(y+1)),
-        id: "#"+(x+1)+"_"+(y+1)
+        element: $("#"+(y+1)+"_"+(x+1)),
+        id: "#"+(y+1)+"_"+(x+1)
      };
 }
 
 function clickCell(x, y, button) {
     let element = getCell(x,y).element.get(0);
-    element.dispatchEvent(new MouseEvent("mousedown", {'view':window, 'bubbles':true, 'cancelable':true, 'button':button}));
-    element.dispatchEvent(new MouseEvent("mouseup", {'view':window, 'bubbles':true, 'cancelable':true, 'button':button}));
+    if (element) {
+        element.dispatchEvent(new MouseEvent("mousedown", {'view':window, 'bubbles':true, 'cancelable':true, 'button':button}));
+        element.dispatchEvent(new MouseEvent("mouseup", {'view':window, 'bubbles':true, 'cancelable':true, 'button':button}));
+    }
 }
 
 function prepareAI() {
@@ -38,7 +40,9 @@ function prepareAI() {
 }
 
 function runAI() {
-   console.log(clickCell(2,2,0))
+    for (let i = 0; i < size[0]; i++) {
+        clickCell(i,0,0);
+    }
 }
 
 prepareAI();

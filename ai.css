@@ -1,6 +1,7 @@
-#game .square.has-potential {
+#game .square.suspect {
 	line-height: 16px;
 	font-size: 12px;
 	text-align: center;
 	cursor: default;
+	color: red;
 }

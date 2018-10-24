@@ -1,0 +1,6 @@
+#game .square.has-potential {
+	line-height: 16px;
+	font-size: 12px;
+	text-align: center;
+	cursor: default;
+}

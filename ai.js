@@ -99,6 +99,7 @@ function prepareAI() {
 }
 
 // returns true if it can't make a good choice
+let min_count = [];
 function showProbabilities() {
     scanBoard();
 
@@ -128,7 +129,8 @@ function showProbabilities() {
 
     // print probabilities
     console.log("-- probabilties (chance of having a mine) --");
-    let min = 101, min_id = '', min_count = [];
+    let min = 101, min_id = '';
+    min_count = [];
     for (let id in probabilities) {
         probabilities[id] = Math.floor(probabilities[id] / max * 100);
         if (probabilities[id] < min) {
@@ -137,11 +139,13 @@ function showProbabilities() {
             min_count = [id];
         }
         // is this probability the same as the previous min?
-        if (probabilities[id] == min) {
+        if (probabilities[id] == min && !min_count.includes(id)) {
             min_count.push(id);
         }
         console.log(`${id}: ${probabilities[id]}%`);
     }
+    console.log("-- min probabilty cell ids --");
+    console.log(min_count)
 
     // click a low probability cell
     if (min_id != '' && min_count.length == 1);
@@ -252,10 +256,18 @@ else if the augmented column value is equal to the maximum bound then
     }
 }
 
+let iterations = 0;
+let max_moves = 60;
 function runAI() {
-    clickCell(0,0,0);
-    let max_moves = 60;
-    while (calculateMove() && max_moves-- >= 0) {
+    if (iterations == 0) clickCell(0,0,0);
+
+    // clear any red cells
+    for (let id of min_count) {
+        el_cell = getCellFromId(id).element.get(0).classList.remove('highlight');
+    }
+
+    while (calculateMove() && iterations < max_moves) {
+        iterations++;
         console.log("continue")
     }
 }

@@ -104,12 +104,25 @@ function showProbabilities() {
     scanBoard();
 
     let probabilities = {};
+    let safe_border_cells = [];
     let no_zero = false;
     let max = 0;
 
     // iterate cells with a number in it
     for (let cell_id in open_cells) {
         let open_cell = getCellFromId(cell_id);
+        let open_cell_value = open_cell.value;
+
+        // decrement value if there are flags nearby
+        for (let b = 0; b < open_cells[cell_id].length; b++) {
+            let border_cell = getCellFromId(border_cells[open_cells[cell_id][b]]);
+
+            if (border_cell.value == -1)
+                open_cell_value--;
+
+            if (open_cell_value <= 0)
+                safe_border_cells.push(border_cell.id);
+        }
 
         // iterate cells that are adjacent to the open cell
         for (let b = 0; b < open_cells[cell_id].length; b++) {
@@ -119,7 +132,13 @@ function showProbabilities() {
             if (border_cell.value == -2) {
                 if (!probabilities[border_cell.id]) probabilities[border_cell.id] = 0;
 
-                probabilities[border_cell.id] += open_cell.value;
+                // this cell is marked safe, skip it
+                if (safe_border_cells.includes(border_cell.id)) {
+                    probabilities[border_cell.id] = 0;
+                    continue;
+                }
+
+                probabilities[border_cell.id] += open_cell_value;
 
                 if (probabilities[border_cell.id] > 0) no_zero = true;
                 if (probabilities[border_cell.id] > max) max = probabilities[border_cell.id];
@@ -144,7 +163,7 @@ function showProbabilities() {
         }
         console.log(`${id}: ${probabilities[id]}%`);
     }
-    console.log("-- min probabilty cell ids --");
+    console.log(`-- min probabilty cell ids (${min}%) --`);
     console.log(min_count)
 
     // click a low probability cell
@@ -153,11 +172,19 @@ function showProbabilities() {
 
     // too many similar probabilties. make the user choose one :)
     if (min_count.length > 1) {
-        console.log("[!!] This is a tough choice. Click a red cell. [!!]");
-        for (let id of min_count) {
-            let el_cell = getCellFromId(id).element.get(0);
-            el_cell.classList.add("highlight");
-            no_zero = false;
+        // multiple 0% cells
+        if (min == 0) {
+            for (let id of min_count) {
+                clickCell(id, 0);
+            }
+
+        } else {
+            console.log("[!!] This is a tough choice. Click a gray cell. [!!]");
+            for (let id of min_count) {
+                let el_cell = getCellFromId(id).element.get(0);
+                el_cell.classList.add("highlight");
+                no_zero = false;
+            }
         }
     }
 
@@ -249,7 +276,7 @@ else if the augmented column value is equal to the maximum bound then
         last_mine_matrix = JSON.stringify(mine_matrix);
         console.log("suspecting",mine_indexes.length,"mines...")
         return calculateMove();
-    } else {
+    } else if (!isGameOver()) {
         console.log("flagged",mine_indexes.length,"mines.")
         mine_matrix = "";
         return showProbabilities();

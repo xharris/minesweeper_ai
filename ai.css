@@ -5,3 +5,7 @@
 	cursor: default;
 	color: red;
 }
+
+#game .square.highlight {
+	background: linear-gradient(rgba(255,0,0,0.5),rgba(255,0,0,0.5)), url(sprite100.gif);
+}

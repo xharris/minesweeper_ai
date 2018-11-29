@@ -164,7 +164,7 @@ function showProbabilities() {
         console.log(`${id}: ${probabilities[id]}%`);
     }
     console.log(`-- min probabilty cell ids (${min}%) --`);
-    console.log(min_count)
+    console.log(min_count.join(', '))
 
     // click a low probability cell
     if (min_id != '' && min_count.length == 1);
@@ -300,8 +300,18 @@ function runAI() {
 }
 
 // "Run AI" button
-$('<input type="button" value="Run AI" id="ai" style="margin-left:10px;" />' ).insertAfter($('#display-link')[0]);
+$('<input type="button" value="Run AI" id="ai" style="margin-left:10px;" /><div id="hovered-cell">...</div>' ).insertAfter($('#display-link')[0]);
+
 $("#ai").on("click", function() {
     prepareAI();
     runAI();
+});
+
+$(document).ready(function(){
+    $("#game .square").mouseover(function(e){
+        $("#hovered-cell").html(e.target.id);
+    }).click(function(e){
+        prepareAI();
+        runAI();
+    });
 });

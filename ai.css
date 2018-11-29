@@ -9,3 +9,9 @@
 #game .square.suspect.highlight {
 	filter: invert(1);
 }
+
+#hovered-cell {
+	display: inline-block;
+	margin: 10px;
+	height: 15px;
+}

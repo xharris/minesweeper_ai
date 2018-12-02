@@ -49,9 +49,7 @@ function clickCell(x, y, button) {
     if (element) {
         element.dispatchEvent(new MouseEvent("mousedown", {'view':window, 'bubbles':true, 'cancelable':true, 'button':button}));
         element.dispatchEvent(new MouseEvent("mouseup", {'view':window, 'bubbles':true, 'cancelable':true, 'button':button}));
-    } else {
-        console.log("couldnt find element",element)
-    }
+    } 
     scanBoard();
 }
 
@@ -196,7 +194,6 @@ function showProbabilities() {
 
     // just click all of the least potential cells
     for (let id of min_count) {
-        console.log('click',id)
         clickCell(id, 0);
         no_zero = true;
     }
@@ -309,8 +306,8 @@ else if the augmented column value is equal to the maximum bound then
 
         // reveal all other cells
         if (safe) {
+            console.log(`Revealing ${open_cells[cell_id].length} safe cells...`)
             for (let b = 0; b < open_cells[cell_id].length; b++) {
-                console.log(`${border_cells[open_cells[cell_id][b]]} is safe. Revealing...`);
                 clickCell(border_cells[open_cells[cell_id][b]], 0);
             }
         }

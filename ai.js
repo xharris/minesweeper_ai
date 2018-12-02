@@ -18,7 +18,7 @@ function getCellFromId(id) {
 
 function getCell(x, y) {
     let index = x + size[0] * y
-    if (x < 0 || y < 0 || index < 0 || index >= cells.length)
+    if (x < 0 || y < 0 || index < 0 || index >= cells.length || !cells[index])
         return;
 
     let class_val = cells[index].classList[1];
@@ -94,6 +94,7 @@ function scanBoard() {
 }
 
 function prepareAI() {
+    iterations = 0;
     size = [$("#game .bordertb").length/3, $("#game .borderlr").length/2];
     scanBoard();
 }
@@ -191,10 +192,10 @@ function showProbabilities() {
     return no_zero;
 }
 
-
 // returns whether game is over
 let last_mine_matrix = "";
 function calculateMove() {
+    console.log("calling calculate move");
     scanBoard();
 
     let mine_matrix = [];
@@ -284,13 +285,15 @@ else if the augmented column value is equal to the maximum bound then
 }
 
 let iterations = 0;
-let max_moves = 60;
+let max_moves = 150;
 function runAI() {
     if (iterations == 0) clickCell(0,0,0);
 
     // clear any red cells
     for (let id of min_count) {
-        el_cell = getCellFromId(id).element.get(0).classList.remove('highlight');
+        el_cell = getCellFromId(id);
+        if (el_cell.element)
+            el_cell.element.get(0).classList.remove('highlight');
     }
 
     while (calculateMove() && iterations < max_moves) {

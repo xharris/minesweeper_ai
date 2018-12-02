@@ -1,0 +1,133 @@
+calling calculate move ai.js:198:5
+continue ai.js:301:9
+calling calculate move ai.js:198:5
+continue ai.js:301:9
+calling calculate move ai.js:198:5
+suspecting 0 mines... ai.js:278:9
+calling calculate move ai.js:198:5
+flagged 0 mines. ai.js:281:9
+-- probabilties (chance of having a mine) -- ai.js:151:5
+#1_5: 0% ai.js:165:9
+#1_6: 0% ai.js:165:9
+#2_6: 0% ai.js:165:9
+#3_6: 0% ai.js:165:9
+#4_6: 100% ai.js:165:9
+#5_6: 100% ai.js:165:9
+#6_6: 75% ai.js:165:9
+#7_4: 0% ai.js:165:9
+#7_5: 0% ai.js:165:9
+#7_6: 25% ai.js:165:9
+#8_5: 50% ai.js:165:9
+#9_5: 50% ai.js:165:9
+#10_3: 25% ai.js:165:9
+#10_4: 25% ai.js:165:9
+#10_5: 25% ai.js:165:9
+-- min probabilty cell ids (0%) -- ai.js:167:5
+#1_5, #1_6, #2_6, #3_6, #7_4, #7_5 ai.js:168:5
+continue ai.js:301:9
+calling calculate move ai.js:198:5
+continue ai.js:301:9
+calling calculate move ai.js:198:5
+continue ai.js:301:9
+calling calculate move ai.js:198:5
+continue ai.js:301:9
+calling calculate move ai.js:198:5
+suspecting 0 mines... ai.js:278:9
+calling calculate move ai.js:198:5
+flagged 0 mines. ai.js:281:9
+-- probabilties (chance of having a mine) -- ai.js:151:5
+#1_7: 100% ai.js:165:9
+#2_7: 0% ai.js:165:9
+#3_7: 0% ai.js:165:9
+#4_7: 0% ai.js:165:9
+#5_6: 0% ai.js:165:9
+#7_6: 0% ai.js:165:9
+#8_5: 0% ai.js:165:9
+#8_6: 0% ai.js:165:9
+#10_3: 0% ai.js:165:9
+#10_4: 0% ai.js:165:9
+#10_5: 0% ai.js:165:9
+-- min probabilty cell ids (0%) -- ai.js:167:5
+#2_7, #3_7, #4_7, #5_6, #7_6, #8_5, #8_6, #10_3, #10_4, #10_5 ai.js:168:5
+continue ai.js:301:9
+calling calculate move ai.js:198:5
+continue ai.js:301:9
+calling calculate move ai.js:198:5
+suspecting 0 mines... ai.js:278:9
+calling calculate move ai.js:198:5
+flagged 0 mines. ai.js:281:9
+-- probabilties (chance of having a mine) -- ai.js:151:5
+#1_8: 33% ai.js:165:9
+#2_8: 66% ai.js:165:9
+#3_8: 100% ai.js:165:9
+#4_8: 66% ai.js:165:9
+#5_7: 0% ai.js:165:9
+#5_8: 33% ai.js:165:9
+#6_7: 0% ai.js:165:9
+#7_7: 0% ai.js:165:9
+#8_7: 0% ai.js:165:9
+#9_6: 0% ai.js:165:9
+#9_7: 0% ai.js:165:9
+#10_3: 0% ai.js:165:9
+#10_4: 0% ai.js:165:9
+#10_5: 0% ai.js:165:9
+#11_3: 0% ai.js:165:9
+#11_4: 0% ai.js:165:9
+#11_5: 0% ai.js:165:9
+#10_6: 0% ai.js:165:9
+-- min probabilty cell ids (0%) -- ai.js:167:5
+#5_7, #6_7, #7_7, #8_7, #9_6, #9_7, #10_3, #10_4, #10_5, #11_3, #11_4, #11_5, #10_6 ai.js:168:5
+continue ai.js:301:9
+calling calculate move ai.js:198:5
+suspecting 0 mines... ai.js:278:9
+calling calculate move ai.js:198:5
+flagged 0 mines. ai.js:281:9
+-- probabilties (chance of having a mine) -- ai.js:151:5
+#1_8: 25% ai.js:165:9
+#2_8: 50% ai.js:165:9
+#3_8: 75% ai.js:165:9
+#4_8: 0% ai.js:165:9
+#5_8: 0% ai.js:165:9
+#6_8: 0% ai.js:165:9
+#7_8: 100% ai.js:165:9
+#8_8: 100% ai.js:165:9
+#9_8: 75% ai.js:165:9
+#10_3: 0% ai.js:165:9
+#10_4: 0% ai.js:165:9
+#10_5: 0% ai.js:165:9
+#10_6: 0% ai.js:165:9
+#10_7: 0% ai.js:165:9
+#10_8: 25% ai.js:165:9
+#11_3: 0% ai.js:165:9
+#11_4: 0% ai.js:165:9
+#11_5: 0% ai.js:165:9
+-- min probabilty cell ids (0%) -- ai.js:167:5
+#4_8, #5_8, #6_8, #10_3, #10_4, #10_5, #10_6, #10_7, #11_3, #11_4, #11_5 ai.js:168:5
+continue ai.js:301:9
+calling calculate move ai.js:198:5
+continue ai.js:301:9
+calling calculate move ai.js:198:5
+continue ai.js:301:9
+calling calculate move ai.js:198:5
+continue ai.js:301:9
+calling calculate move ai.js:198:5
+continue ai.js:301:9
+calling calculate move ai.js:198:5
+suspecting 0 mines... ai.js:278:9
+calling calculate move ai.js:198:5
+flagged 0 mines. ai.js:281:9
+-- probabilties (chance of having a mine) -- ai.js:151:5
+#1_8: NaN% ai.js:165:9
+#3_8: NaN% ai.js:165:9
+#7_9: NaN% ai.js:165:9
+#8_8: NaN% ai.js:165:9
+#10_3: NaN% ai.js:165:9
+#10_4: NaN% ai.js:165:9
+#10_5: NaN% ai.js:165:9
+#10_6: NaN% ai.js:165:9
+#10_7: NaN% ai.js:165:9
+#10_8: NaN% ai.js:165:9
+#11_3: NaN% ai.js:165:9
+#11_4: NaN% ai.js:165:9
+#11_5: NaN% ai.js:165:9
+-- min probabilty cell ids (101%) --

@@ -1,6 +1,4 @@
-
-
-
+var PROBABILITY_THRESHOLD = 50;
 var size = []; // [width, height]
 
 function isGameOver() {
@@ -18,7 +16,7 @@ function getCellFromId(id) {
 
 function getCell(x, y) {
     let index = x + size[0] * y
-    if (x < 0 || y < 0 || x > size[0] || y > size[1] || index < 0 || index >= cells.length || !cells[index])
+    if (x < 0 || y < 0 || y > size[0] || x > size[1] || index < 0 || index >= cells.length || !cells[index])
         return;
 
     let class_val = cells[index].classList[1];
@@ -69,26 +67,28 @@ function scanBoard() {
         // check all neighboring cells
         let open_cell = getCellFromId(e.id);
 
-        for (let offx = -1; offx <= 1; offx++) {
-            for (let offy = -1; offy <= 1; offy++) {
-                let cell = getCell(open_cell.position[0]+offx, open_cell.position[1]+offy);
+        if (open_cell) {
+            for (let offx = -1; offx <= 1; offx++) {
+                for (let offy = -1; offy <= 1; offy++) {
+                    let cell = getCell(open_cell.position[0]+offx, open_cell.position[1]+offy);
 
-                // add untouched cell to collection
-                if (cell && cell.value <= -1) {
-                    if (!(open_cell.id in open_cells))
-                        open_cells[open_cell.id] = [];
+                    // add untouched cell to collection
+                    if (cell && cell.value <= -1) {
+                        if (!(open_cell.id in open_cells))
+                            open_cells[open_cell.id] = [];
 
-                    let el_index = border_cells.findIndex((element) => element == cell.id);
-                    if (el_index < 0) {
-                        border_cells.push(cell.id);
-                        el_index = border_cells.length - 1;
+                        let el_index = border_cells.findIndex((element) => element == cell.id);
+                        if (el_index < 0) {
+                            border_cells.push(cell.id);
+                            el_index = border_cells.length - 1;
+                        }
+                        if (!open_cells[open_cell.id].includes(el_index))
+                            open_cells[open_cell.id].push(el_index);
+
+                        let b_cell = getCellFromId(border_cells[el_index])
+                        //b_cell.element.html(el_index);
+                        b_cell.element.addClass("suspect")
                     }
-                    if (!open_cells[open_cell.id].includes(el_index))
-                        open_cells[open_cell.id].push(el_index);
-
-                    let b_cell = getCellFromId(border_cells[el_index])
-                    //b_cell.element.html(el_index);
-                    b_cell.element.addClass("suspect")
                 }
             }
         }
@@ -169,33 +169,25 @@ function showProbabilities() {
     console.log(`-- min probabilty cell ids (${min}%) --`);
     console.log(min_count.join(', '))
 
-    // click a low probability cell
-    if (min_id != '' && min_count.length == 1);
-        clickCell(min_id, 0);
 
-    // too many similar probabilties. make the user choose one :)
-    if (min_count.length > 1) {
-        // multiple 0% cells
-        if (min <= 50) {
-            /*
-            for (let id of min_count) {
+    // minimum probability not low enoug. make the user choose one :)
+    if (min >= PROBABILITY_THRESHOLD) {
+
+        console.log("[!!] This is a tough choice. Click a gray cell. [!!]");
+        for (let id of min_count) {
+            let el_cell = getCellFromId(id).element.get(0);
+            el_cell.classList.add("highlight");
+            // no_zero = false;
+        }
+    } else {
+
+        // click all of the least potential cells
+        for (let id in probabilities) {
+            if (probabilities[id] <= PROBABILITY_THRESHOLD) {
                 clickCell(id, 0);
-            }*/
-
-        } else {
-            console.log("[!!] This is a tough choice. Click a gray cell. [!!]");
-            for (let id of min_count) {
-                let el_cell = getCellFromId(id).element.get(0);
-                el_cell.classList.add("highlight");
-                // no_zero = false;
+                no_zero = true;
             }
         }
-    }
-
-    // just click all of the least potential cells
-    for (let id of min_count) {
-        clickCell(id, 0);
-        no_zero = true;
     }
 
     return no_zero;
@@ -284,6 +276,7 @@ else if the augmented column value is equal to the maximum bound then
     }
 
     // reveal cells that are guaranteed to be safe (Ex. a cell with a '1' that has 1 nearby flag is correct. reveal all the other cells around it)
+    let safe_count = 0;
     for (let cell_id in open_cells) {
         let open_cell = getCellFromId(cell_id);
         let open_cell_value = open_cell.value;
@@ -306,12 +299,13 @@ else if the augmented column value is equal to the maximum bound then
 
         // reveal all other cells
         if (safe) {
-            console.log(`Revealing ${open_cells[cell_id].length} safe cells...`)
             for (let b = 0; b < open_cells[cell_id].length; b++) {
+                safe_count++;
                 clickCell(border_cells[open_cells[cell_id][b]], 0);
             }
         }
     }
+    console.log(`Revealing ${safe_count} safe cells...`)
 
     if (JSON.stringify(mine_matrix) != last_mine_matrix) {
         last_mine_matrix = JSON.stringify(mine_matrix);
